@@ -1,0 +1,95 @@
+create DATABASE sorveteria;
+
+USE sorveteria;
+
+create table funcionario(
+id int unsigned not null auto_increment,
+nome varchar(40) not null,
+cpf varchar (40)not null,
+salario double not null default'0' ,
+primary key (id)
+);
+create table cliente(
+id_cliente int unsigned not null auto_increment,
+funcionario_id int unsigned default null,
+nome Varchar (40) not null,
+primary key (id_cliente),
+constraint cf_cliente_funcionario foreign key (funcionario_id) references funcionario(id)
+);
+create table produto(
+id_produto int not null auto_increment,
+cliente_id int unsigned default null,
+nomeproduto varchar (40) not null,
+precoproduto varchar (48) not null,
+primary key (id_produto),
+constraint vp_produto_funcionario foreign key (cliente_id) references cliente(id_cliente)
+); 
+create table pagamento(
+Id_pagamento int not null auto_increment,
+produto_id int unsigned default null,
+Tipo varchar (20) not null,
+primary key (id_pagamento),
+constraint cp_pagamento_produto foreign key (produto_id) references cliente(id_cliente)
+);
+
+create table venda(
+Id_venda int not null auto_increment,
+Venda_id int unsigned default null,
+datadevenda varchar(40) not null ,
+Primary key (id_venda),
+constraint ven_venda_pagamento foreign key (venda_id) references cliente(id_cliente)
+);
+
+Insert into funcionario(Nome,cpf,salario)
+Values("Ananda",30028922101,2000);
+Insert into funcionario(Nome,cpf,salario)
+Values("Marcos", 48302948574,1500);
+Insert into funcionario(Nome,cpf,salario)
+Values("Aline",74893922719,1500);
+Insert into funcionario(Nome,cpf,salario)
+Values("João", 92992840213,1000);
+Insert into funcionario(Nome,cpf,salario)
+Values("Eduardo",67584939012,500);
+
+Insert into produto(nomeproduto,precoproduto)
+values("sorvete de morango", 8.90);
+Insert into produto(nomeproduto,precoproduto)
+values("sorvete de flocos", 8.90);
+Insert into produto(nomeproduto,precoproduto)
+values("sorvete de chocolate",8.90);
+Insert into produto(nomeproduto, precoproduto)
+Values("sorvete de napolitano",10.90);
+Insert into produto(nomeproduto, precoproduto)
+Values("açaí",9.90);
+
+Insert into cliente(Nome)
+Values("Anna");
+Insert into cliente(Nome)
+Values ("victor");
+Insert into cliente(Nome)
+Values ("Levi");
+Insert into cliente(Nome)
+Values("Bia");
+Insert into cliente(Nome)
+Values("Mel");
+
+Insert into pagamento(Tipo)
+Values("dinheiro");
+Insert into pagamento(Tipo)
+Values ("Cartão de Crédito");
+Insert into pagamento(Tipo)
+Values("Cartão de Débito");
+Insert into pagamento(Tipo)
+Values("Pix");
+
+Insert into venda(datadevenda)
+Values("22/05/2023");
+Insert into venda(datadevenda)
+Values("23/05/2023");
+Insert into venda(datadevenda)
+Values("24/05/2023");
+Insert into venda(datadevenda)
+Values("25/05/2023");
+Insert into venda(datadevenda)
+Values("26/05/2023");
+
